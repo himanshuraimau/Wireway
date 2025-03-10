@@ -9,8 +9,10 @@ import {
   FormInput,
   FormTextArea,
   FormSelect,
-  Button
-} from '../elements';
+  Button,
+    // Add this import
+} from '../elements/index';
+import { TextBlock } from '../elements/TextBlock';
 import {
   WireframeSchema,
   ElementSchema,
@@ -20,7 +22,12 @@ import {
   ListSchema,
   FormSchema,
   NavBarSchema,
-  FormFieldSchema
+  FormFieldSchema,
+  ButtonSchema,    // Add these new imports
+  TextBlockSchema,
+  CardSchema,
+  ImageSchema,
+  DividerSchema
 } from '../../../schemas/WireframeSchema';
 
 interface WireframeRendererProps {
@@ -66,6 +73,16 @@ const WireframeRenderer: React.FC<WireframeRendererProps> = ({
         return renderForm(element as FormSchema);
       case 'navBar':
         return renderNavBar(element as NavBarSchema);
+      case 'textBlock':
+        return renderTextBlock(element as TextBlockSchema);
+      case 'button':
+        return renderButton(element as ButtonSchema);
+      case 'card':
+        return renderCard(element as CardSchema);
+      case 'image':
+        return renderImage(element as ImageSchema);
+      case 'divider':
+        return renderDivider(element as DividerSchema);
       default:
         return null;
     }
@@ -148,7 +165,7 @@ const WireframeRenderer: React.FC<WireframeRendererProps> = ({
           <FormSelect
             key={field.id}
             label={field.label}
-            options={field.options}
+            options={field.options || []}
           />
         );
       case 'dateInput':
@@ -191,9 +208,45 @@ const WireframeRenderer: React.FC<WireframeRendererProps> = ({
     );
   };
 
+  const renderTextBlock = (textBlock: TextBlockSchema) => {
+    return (
+      <TextBlock
+        key={textBlock.id}
+        content={textBlock.content}
+        variant={textBlock.variant}
+        alignment={textBlock.alignment}
+      />
+    );
+  };
+
+  const renderButton = (button: ButtonSchema) => {
+    return (
+      <Button
+        key={button.id}
+        text={button.text}
+        onClick={button.target ? () => handleNavigation(button.target!) : undefined}
+      />
+    );
+  };
+
+  const renderCard = (card: CardSchema) => {
+    // Implement card rendering
+    return null;
+  };
+
+  const renderImage = (image: ImageSchema) => {
+    // Implement image rendering
+    return null;
+  };
+
+  const renderDivider = (divider: DividerSchema) => {
+    // Implement divider rendering
+    return null;
+  };
+
   return (
     <WireframeContainer>
-      {currentScreen.elements.map(element => renderElement(element))}
+      {currentScreen && currentScreen.elements.map(element => renderElement(element))}
     </WireframeContainer>
   );
 };

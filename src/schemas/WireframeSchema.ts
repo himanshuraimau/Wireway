@@ -7,6 +7,16 @@ export interface ScreenSchema {
   id: string;
   name: string;
   elements: ElementSchema[];
+  layout?: {
+    padding?: string;
+    gap?: string;
+    maxWidth?: string;
+    background?: string;
+  };
+  transitions?: {
+    enter?: string;
+    exit?: string;
+  };
 }
 
 export type ElementSchema =
@@ -15,7 +25,12 @@ export type ElementSchema =
   | TabsSchema
   | ListSchema
   | FormSchema
-  | NavBarSchema;
+  | NavBarSchema
+  | CardSchema        // New
+  | ImageSchema       // New
+  | ButtonSchema      // New
+  | DividerSchema     // New
+  | TextBlockSchema;  // New
 
 export interface BaseElementSchema {
   type: string;
@@ -29,6 +44,9 @@ export interface HeaderSchema extends BaseElementSchema {
   hasAddButton?: boolean;
   backButtonTarget?: string; // Screen ID to navigate to
   addButtonTarget?: string; // Screen ID to navigate to
+  actions?: ButtonSchema[];
+  subtitle?: string;
+  fixed?: boolean;
 }
 
 export interface SearchBarSchema extends BaseElementSchema {
@@ -54,6 +72,13 @@ export interface ListItemSchema {
   hasCheckbox?: boolean;
   checked?: boolean;
   target?: string; // Screen ID to navigate to when clicked
+  icon?: string;
+  badge?: {
+    text: string;
+    color?: string;
+  };
+  subtitle?: string;
+  image?: string;
 }
 
 export interface FormSchema extends BaseElementSchema {
@@ -63,41 +88,22 @@ export interface FormSchema extends BaseElementSchema {
   submitTarget?: string; // Screen ID to navigate to on submit
 }
 
-export type FormFieldSchema =
-  | TextInputSchema
-  | TextAreaSchema
-  | SelectSchema
-  | DateInputSchema;
-
-export interface TextInputSchema {
-  type: 'textInput';
+export interface FormFieldSchema {
+  type: 'textInput' | 'textArea' | 'select' | 'dateInput';
   id: string;
   label: string;
   placeholder?: string;
   required?: boolean;
-}
-
-export interface TextAreaSchema {
-  type: 'textArea';
-  id: string;
-  label: string;
-  placeholder?: string;
-  required?: boolean;
-}
-
-export interface SelectSchema {
-  type: 'select';
-  id: string;
-  label: string;
-  options: string[];
-  required?: boolean;
-}
-
-export interface DateInputSchema {
-  type: 'dateInput';
-  id: string;
-  label: string;
-  required?: boolean;
+  validation?: {
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    pattern?: string;
+    customError?: string;
+  };
+  disabled?: boolean;
+  defaultValue?: string | number | boolean;
+  options?: string[]; // Add this line
 }
 
 export interface NavBarSchema extends BaseElementSchema {
@@ -108,6 +114,49 @@ export interface NavBarSchema extends BaseElementSchema {
 export interface NavButtonSchema {
   label: string;
   target: string; // Screen ID to navigate to
+}
+
+export interface CardSchema extends BaseElementSchema {
+  type: 'card';
+  title?: string;
+  subtitle?: string;
+  content?: string;
+  image?: string;
+  actions?: ButtonSchema[];
+  direction?: 'horizontal' | 'vertical';
+  target?: string;
+}
+
+export interface ImageSchema extends BaseElementSchema {
+  type: 'image';
+  src: string;
+  alt?: string;
+  aspectRatio?: string;
+  fit?: 'cover' | 'contain';
+  clickable?: boolean;
+  target?: string;
+}
+
+export interface ButtonSchema extends BaseElementSchema {
+  type: 'button';
+  text: string;
+  variant?: 'primary' | 'secondary' | 'outlined' | 'text';
+  icon?: string;
+  target?: string;
+  disabled?: boolean;
+}
+
+export interface DividerSchema extends BaseElementSchema {
+  type: 'divider';
+  text?: string;
+  orientation?: 'horizontal' | 'vertical';
+}
+
+export interface TextBlockSchema extends BaseElementSchema {
+  type: 'textBlock';
+  content: string;
+  variant?: 'title' | 'subtitle' | 'body' | 'caption';
+  alignment?: 'left' | 'center' | 'right';
 }
 
 // Example schema for a Todo app
@@ -309,4 +358,11 @@ export const todoAppSchema: WireframeSchema = {
       ]
     }
   ]
-}; 
+};
+
+export {
+  socialAppSchema,
+  ecommerceAppSchema,
+  newsAppSchema,
+  weatherAppSchema
+} from './mockApps';

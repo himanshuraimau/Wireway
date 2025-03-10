@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import WireframeRenderer from '../renderer';
-import { WireframeSchema, todoAppSchema } from '../../../schemas/wireframe';
+import { WireframeSchema, todoAppSchema } from '../../../schemas/WireframeSchema';
 
 interface WireframeEditorProps {
   onSave?: (schema: WireframeSchema) => void;
