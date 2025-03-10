@@ -1,18 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Wireway - Wireframe Builder
 
-## Getting Started
+A simple application for creating and visualizing wireframes using a JSON schema.
 
-First, run the development server:
+### Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   Real-time wireframe rendering from JSON schema
+-   Customizable UI elements
+-   Easy-to-use editor
+
+### Getting Started
+
+1.  Clone the repository:
+
+    ```bash
+    git clone [repository URL]
+    ```
+
+2.  Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3.  Run the development server:
+
+    ```bash
+    npm run dev
+    ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -20,17 +34,28 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+### Directory Structure
 
-To learn more about Next.js, take a look at the following resources:
+-   `src/`: Contains the application source code.
+    -   `app/`: Next.js application directory.
+    -   `components/`: React components.
+        -   `wireframe/`: Wireframe-specific components.
+            -   `elements/`: Individual wireframe elements (Header, SearchBar, etc.).
+            -   `container/`: Wireframe container component.
+            -   `editor/`: Wireframe editor component.
+            -   `renderer/`: Wireframe renderer component.
+    -   `schemas/`: JSON schema definitions for wireframes.
+    -   `pages/`: Next.js pages.
+        -   `home/`: Home page component.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-   Next.js
+-   React
+-   Tailwind CSS
+-   TypeScript
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please fork the repository and submit a pull request with your changes.
